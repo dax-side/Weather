@@ -6,12 +6,12 @@ body {
   height: 100vh;
   margin: 0;
   font-family: 'Open Sans', sans-serif;
-  background-color: #222;
-  background-image: url('https://images.unsplash.com/photo-1495573570028-3f02e8cdb7e5?crop=entropy&cs=tinysrgb&fit=max&ixid=MnwzNjg0OXwwfDF8c2VhY2h8MTl8fGxvY2F0aW9uJTIwbGFuZHN8ZW58MHx8fHwxNjYwODc5NjE2&ixlib=rb-1.2.1&q=80&w=1080');
+  background: #222;
+  background-image: url('https://source.unsplash.com/1600x900/?weather');
   background-size: cover;
   background-position: center;
-  background-attachment: fixed;
 }
+
 
 /* Card container styling */
 .card {
