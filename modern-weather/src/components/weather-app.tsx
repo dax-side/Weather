@@ -11,11 +11,26 @@ export function WeatherApp() {
   const { state, fetchWeather } = useWeatherContext()
   const { currentWeather, isLoading, error } = state
   const [currentTime, setCurrentTime] = useState(new Date())
+  const [dimensions, setDimensions] = useState({ width: 1200, height: 800 })
 
   // Update time every minute
   useEffect(() => {
     const timer = setInterval(() => setCurrentTime(new Date()), 60000)
     return () => clearInterval(timer)
+  }, [])
+
+  // Set window dimensions after component mounts
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setDimensions({ width: window.innerWidth, height: window.innerHeight })
+      
+      const handleResize = () => {
+        setDimensions({ width: window.innerWidth, height: window.innerHeight })
+      }
+      
+      window.addEventListener('resize', handleResize)
+      return () => window.removeEventListener('resize', handleResize)
+    }
   }, [])
 
   const formatTime = (date: Date) => {
@@ -44,8 +59,8 @@ export function WeatherApp() {
             key={i}
             className="absolute w-2 h-2 bg-white/20 rounded-full"
             initial={{
-              x: Math.random() * window.innerWidth,
-              y: Math.random() * window.innerHeight,
+              x: Math.random() * dimensions.width,
+              y: Math.random() * dimensions.height,
             }}
             animate={{
               y: [null, -100],

@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 
-const API_KEY = process.env.OPENWEATHER_API_KEY || '62f26e04d8e08b535201a0a6abe06176'
+const API_KEY = process.env.OPENWEATHER_API_KEY
 
 export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams
@@ -10,6 +10,13 @@ export async function GET(request: NextRequest) {
     return NextResponse.json(
       { error: 'City parameter is required' },
       { status: 400 }
+    )
+  }
+
+  if (!API_KEY) {
+    return NextResponse.json(
+      { error: 'API key not configured' },
+      { status: 500 }
     )
   }
 
