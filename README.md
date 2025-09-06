@@ -154,6 +154,6 @@ This is a personal side project, but suggestions and feedback are always welcome
 
 ---
 
-**Live Demo:** [https://dax-side.netlify.app/](https://dax-side.netlify.app/)
+**Live Demo:** [https://dax-side.netlify.app/](https://daxweather.netlify.app/)
 
 Built with love by [dax-side](https://github.com/dax-side)
