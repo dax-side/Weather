@@ -127,11 +127,22 @@ export function WeatherProvider({ children }: { children: ReactNode }) {
     dispatch({ type: 'SET_ERROR', payload: null })
 
     try {
-      const response = await fetch(`/api/weather?city=${encodeURIComponent(city)}`)
+      // Use environment variable for API key (will be replaced during build)
+      const API_KEY = process.env.NEXT_PUBLIC_OPENWEATHER_API_KEY
+      
+      if (!API_KEY) {
+        throw new Error('Weather API key not configured')
+      }
+
+      const response = await fetch(
+        `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(city)}&units=metric&appid=${API_KEY}`
+      )
 
       if (!response.ok) {
-        const errorData = await response.json()
-        throw new Error(errorData.error || 'Failed to fetch weather data')
+        if (response.status === 404) {
+          throw new Error('City not found')
+        }
+        throw new Error('Failed to fetch weather data')
       }
 
       const data = await response.json()
